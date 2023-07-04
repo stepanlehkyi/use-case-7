@@ -1,5 +1,5 @@
 namespace UseCase7TestProject {
-  public class UnitTest1 {
+  public class Test {
     [Fact]
     public void Test1() {
 
