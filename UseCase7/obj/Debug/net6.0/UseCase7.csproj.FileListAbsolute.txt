@@ -1,0 +1,15 @@
+C:\GPT-4\UC7\use-case-7\UseCase7\obj\Debug\net6.0\UseCase7.csproj.AssemblyReference.cache
+C:\GPT-4\UC7\use-case-7\UseCase7\obj\Debug\net6.0\UseCase7.GeneratedMSBuildEditorConfig.editorconfig
+C:\GPT-4\UC7\use-case-7\UseCase7\obj\Debug\net6.0\UseCase7.AssemblyInfoInputs.cache
+C:\GPT-4\UC7\use-case-7\UseCase7\obj\Debug\net6.0\UseCase7.AssemblyInfo.cs
+C:\GPT-4\UC7\use-case-7\UseCase7\obj\Debug\net6.0\UseCase7.csproj.CoreCompileInputs.cache
+C:\GPT-4\UC7\use-case-7\UseCase7\bin\Debug\net6.0\UseCase7.exe
+C:\GPT-4\UC7\use-case-7\UseCase7\bin\Debug\net6.0\UseCase7.deps.json
+C:\GPT-4\UC7\use-case-7\UseCase7\bin\Debug\net6.0\UseCase7.runtimeconfig.json
+C:\GPT-4\UC7\use-case-7\UseCase7\bin\Debug\net6.0\UseCase7.dll
+C:\GPT-4\UC7\use-case-7\UseCase7\bin\Debug\net6.0\UseCase7.pdb
+C:\GPT-4\UC7\use-case-7\UseCase7\obj\Debug\net6.0\UseCase7.dll
+C:\GPT-4\UC7\use-case-7\UseCase7\obj\Debug\net6.0\refint\UseCase7.dll
+C:\GPT-4\UC7\use-case-7\UseCase7\obj\Debug\net6.0\UseCase7.pdb
+C:\GPT-4\UC7\use-case-7\UseCase7\obj\Debug\net6.0\UseCase7.genruntimeconfig.cache
+C:\GPT-4\UC7\use-case-7\UseCase7\obj\Debug\net6.0\ref\UseCase7.dll
