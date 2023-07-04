@@ -36,7 +36,7 @@ jobs:
              echo "Current directory: $(pwd)"
              Get-ChildItem -Force
       - name: Build project
-        run: dotnet build
+        run: dotnet build D:\a\use-case-7\use-case-7\UseCase7
         
 
 
