@@ -43,6 +43,6 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"stepanlehkyi_use-case-7" /o:"stepanlehkyi" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.msbuild.projectKey="UseCase7/UseCase7.csproj"
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"stepanlehkyi_use-case-7" /o:"stepanlehkyi" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.msbuild.projectKey="use-case-7/UseCase7.csproj"
           dotnet build
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
