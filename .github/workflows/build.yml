@@ -31,12 +31,13 @@ jobs:
           path: .\.sonar\scanner
           key: ${{ runner.os }}-sonar-scanner
           restore-keys: ${{ runner.os }}-sonar-scanner
-      - name: Build project
-        run: dotnet build
-        
       - name: Debug working directory
         run: |
              echo "Current directory: $(pwd)"
+      - name: Build project
+        run: dotnet build
+        
+
 
       - name: Install SonarCloud scanner
         if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
