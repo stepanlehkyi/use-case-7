@@ -1,4 +1,4 @@
- User
+User
 Here is my code:
   public class Player {
     public string? Name { get; set; }
