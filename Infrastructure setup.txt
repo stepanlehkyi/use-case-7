@@ -1,0 +1,114 @@
+User
+How to Bind SonarCloud.io to my GItHub repository
+ChatGPT
+As of my knowledge cutoff in September 2021, SonarCloud offers an integration with GitHub. Here are the steps to connect your GitHub repository with SonarCloud:
+
+Sign up to SonarCloud with your GitHub account: Visit SonarCloud.io and use the option to sign up with GitHub.
+
+Choose your GitHub organization or user: You should see a list of all the organizations you have admin rights to on GitHub, as well as your personal user account. Choose the one you want to analyze the repositories from.
+
+Install the SonarCloud application on your GitHub account: You will be redirected to GitHub for installing the SonarCloud application. During the installation process, select the organization/repositories where you want to use SonarCloud.
+
+Authorize SonarCloud on your repositories: SonarCloud needs permissions to commit statuses, create webhooks and access to the repository's content for the purpose of analysis. Ensure that the appropriate permissions are granted.
+
+Create a new project in SonarCloud: Now go back to SonarCloud. You should be able to create a new project based on your GitHub repositories.
+
+Analyze your source code: Once the project has been created, SonarCloud will guide you to analyze your source code. Depending on the language, you might need to set up a CI pipeline or analyze it manually.
+
+For CI/CD integration, if you're using GitHub Actions, add a new job in your workflow to run the SonarCloud analysis:
+
+Use the SonarCloud GitHub Action: "sonarsource/sonarcloud-github-action@master"
+Set up your SonarCloud project key and organization key.
+Use the SonarCloud token generated on SonarCloud.io for authorization.
+If there have been updates or changes in the process after 2021, please refer to the latest SonarCloud documentation or contact their support for guidance.
+
+
+
+
+
+User
+While creating .github/workflows/build.yml file in my GitHub repo Sonarcloud has generated me file 
+name: SonarCloud
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  build:
+    name: Build and analyze
+    runs-on: windows-latest
+    steps:
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: 11
+          distribution: 'zulu' # Alternative distribution options are available.
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v3
+        with:
+          path: ~\sonar\cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+      - name: Cache SonarCloud scanner
+        id: cache-sonar-scanner
+        uses: actions/cache@v3
+        with:
+          path: .\.sonar\scanner
+          key: ${{ runner.os }}-sonar-scanner
+          restore-keys: ${{ runner.os }}-sonar-scanner
+      - name: Install SonarCloud scanner
+        if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
+        shell: powershell
+        run: |
+          New-Item -Path .\.sonar\scanner -ItemType Directory
+          dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
+      - name: Build and analyze
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        shell: powershell
+        run: |
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"stepanlehkyi_use-case-7" /o:"stepanlehkyi" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+          <insert_your_build_command>
+          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+
+How should I replace <insert_your_build_command> section?
+ChatGPT
+The <insert_your_build_command> is where you put the commands to build your project. The build command will depend on the programming language and the build system that you're using.
+
+Here are a few examples:
+
+If your project is a .NET Core project, you would typically use dotnet build:
+
+yaml
+Copy code
+run: |
+  .\.sonar\scanner\dotnet-sonarscanner begin /k:"stepanlehkyi_use-case-7" /o:"stepanlehkyi" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+  dotnet build
+  .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+If your project is a Java Maven project, you would use mvn clean install:
+
+yaml
+Copy code
+run: |
+  .\.sonar\scanner\dotnet-sonarscanner begin /k:"stepanlehkyi_use-case-7" /o:"stepanlehkyi" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+  mvn clean install
+  .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+If your project is a JavaScript Node.js project, you might use npm install && npm run build:
+
+yaml
+Copy code
+run: |
+  .\.sonar\scanner\dotnet-sonarscanner begin /k:"stepanlehkyi_use-case-7" /o:"stepanlehkyi" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+  npm install && npm run build
+  .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+So, you need to replace <insert_your_build_command> with the command you'd typically use to build your project from the command line.
+
+Remember, the goal of the <insert_your_build_command> is to compile your code so that the SonarCloud scanner can analyze the compiled binaries and source code to find any issues.
+
+It's important to note that you'll need to have the necessary dependencies and build tools for your language installed on the GitHub Actions runner. Most common languages and build tools are pre-installed on GitHub-hosted runners, but you may need to add steps to your workflow to install any special requirements your project has.
