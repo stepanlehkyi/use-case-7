@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace UseCase7 {
-  public class PlayerAnalyzer {
-    public double CalculateScore(List<Player> players) {
+  public static class PlayerAnalyzer {
+    public static double CalculateScore(List<Player> players) {
       double score = 0;
 
       foreach (var player in players) {
