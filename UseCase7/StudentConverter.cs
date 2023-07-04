@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace UseCase7 {
-  public class StudentConverter {
-    public List<Student> ConvertStudents(List<Student> students) {
+  public static class StudentConverter {
+    public static List<Student> ConvertStudents(List<Student>? students) {
       return students.Select(student =>
       {
         var result = new Student {

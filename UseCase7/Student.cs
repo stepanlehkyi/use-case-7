@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace UseCase7 {
   public class Student {
-    public string Name { get; set; }
+    public string? Name { get; set; }
     public int Age { get; set; }
     public int Grade { get; set; }
     public bool Exceptional { get; set; }

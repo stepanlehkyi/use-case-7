@@ -10,10 +10,9 @@ namespace UseCase7TestProject {
       {
             new Student { Name = "John", Age = 22, Grade = 95 }
         };
-      var converter = new StudentConverter();
 
       // Act
-      var result = converter.ConvertStudents(students);
+      var result = StudentConverter.ConvertStudents(students);
 
       // Assert
       Assert.Single(result);
@@ -27,10 +26,9 @@ namespace UseCase7TestProject {
       {
             new Student { Name = "Jane", Age = 20, Grade = 95 }
         };
-      var converter = new StudentConverter();
 
       // Act
-      var result = converter.ConvertStudents(students);
+      var result = StudentConverter.ConvertStudents(students);
 
       // Assert
       Assert.Single(result);
@@ -44,10 +42,9 @@ namespace UseCase7TestProject {
       {
             new Student { Name = "Alice", Age = 25, Grade = 85 }
         };
-      var converter = new StudentConverter();
 
       // Act
-      var result = converter.ConvertStudents(students);
+      var result = StudentConverter.ConvertStudents(students);
 
       // Assert
       Assert.Single(result);
@@ -61,10 +58,9 @@ namespace UseCase7TestProject {
       {
             new Student { Name = "Bob", Age = 23, Grade = 60 }
         };
-      var converter = new StudentConverter();
 
       // Act
-      var result = converter.ConvertStudents(students);
+      var result = StudentConverter.ConvertStudents(students);
 
       // Assert
       Assert.Single(result);
@@ -75,10 +71,9 @@ namespace UseCase7TestProject {
     public void ConvertStudents_ShouldReturnEmpty_WhenInputIsEmpty() {
       // Arrange
       var students = new List<Student>();
-      var converter = new StudentConverter();
 
       // Act
-      var result = converter.ConvertStudents(students);
+      var result = StudentConverter.ConvertStudents(students);
 
       // Assert
       Assert.Empty(result);
@@ -87,11 +82,10 @@ namespace UseCase7TestProject {
     [Fact]
     public void ConvertStudents_ShouldThrowException_WhenInputIsNotArray() {
       // Arrange
-      List<Student> students = null; // Or any non-array value
-      var converter = new StudentConverter();
+      List<Student>? students = null; // Or any non-array value
 
       // Assert
-      Assert.ThrowsAny<Exception>(() => converter.ConvertStudents(students));
+      Assert.Throws<ArgumentNullException>(() => StudentConverter.ConvertStudents(students));
     }
 
   }
