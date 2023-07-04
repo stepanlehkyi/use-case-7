@@ -34,6 +34,7 @@ jobs:
       - name: Debug working directory
         run: |
              echo "Current directory: $(pwd)"
+             ls -al
       - name: Build project
         run: dotnet build
         
